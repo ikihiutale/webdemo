@@ -1,0 +1,17 @@
+
+git remote -v
+git fetch origin
+git rebase origin/master
+git add .
+git push heroku master
+
+git commit -m ""
+git push 
+git fetch origin
+git rebase origin/master
+
+heroku login
+heroku create
+git push heroku master
+heroku ps:scale web=1
+heroku logs --tail
