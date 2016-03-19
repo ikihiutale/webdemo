@@ -1,0 +1,40 @@
+# http://mislav.net/2010/07/git-tips/
+#Status
+git status -sb
+
+# Show branches, tags in git log
+git log --oneline --decorate
+
+# Push a branch and automatically set tracking
+# Tracking is essentially a link between a local and remote branch. 
+# When working on a local branch that tracks some other branch, you can 
+# git pull and git push without any extra arguments and git will know what to do.
+#
+# Pushes the "master" branch to "origin" remote and sets up tracking
+git push -u origin master
+
+# However, git push will by default push all branches that have the same name 
+# on the remote. To limit this behavior to just the current branch, set this configuration option:
+git config --global push.default tracking
+
+# This is to prevent accidental pushes to branches which you’re not ready to push yet
+
+# Pull with rebase instead of merge
+$ git pull --rebase
+# e.g. if on branch "master": performs a git fetch origin,
+# then git rebase origin/master
+
+# git fetch
+# git diff ...origin
+# git diff ...origin is equivalent to git diff $(git-merge-base HEAD origin) origin
+
+# STAGE:
+git add -A # stages All
+git add . # stages new and modified, without deleted
+git add -u # stages modified and deleted, without new
+
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/ikihiutale/webdemo.git
+git push -u origin master
