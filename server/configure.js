@@ -13,8 +13,9 @@ var path = require('path'),
 	//multer = require('multer'),
 	// Allows cookies to be sent and received
 	cookieParser = require('cookie-parser'),
-	// Logging
+	// Automated logging of request/response
 	morgan = require('morgan'),
+	logger = require('./logger'),
 	// For older browsers that don't properly support 
 	// REST HTTP verbs the methodOverride allows 
 	// this to be faked using a special hidden input field
@@ -42,7 +43,8 @@ function randomValueHex (len) {
 
 module.exports = {
 	init: function(app) { 
-		app.use(morgan('dev'));
+		//app.use(morgan("combined", { "stream": logger.stream }));
+		//app.use(morgan('dev'));
 		app.use(bodyParser.urlencoded({'extended':true}));
 		app.use(bodyParser.json());
 		app.use(methodOverride());

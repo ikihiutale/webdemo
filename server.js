@@ -1,6 +1,7 @@
-var express = require('express'),
-	config = require('./server/configure'),
+var express = require('express'),	
 	mongoose = require('mongoose'),
+	config = require('./server/configure'),
+	logger = require('./server/logger'),
 	app = express();
 // The process.env.PORT constant is an environment 
 // setting that is set on the actual machine for the 
@@ -16,23 +17,31 @@ app = config.init(app);
 var dbURL = process.env.MONGOLAB_URI || 'mongodb://localhost/imgPloadr';
 
 mongoose.set('debug', true);
-//console.log('Mongoose STARTING ' + dbURL);
+
+//Configure mongoose for debug
+mongoose.set('debug', function (coll, method, query, doc, options) {
+	// Mongoose: images.findOne({ _id: ObjectId("56eebc4185621303004f70e9") }) { fields: undefined }
+	var queryTmp = JSON.stringify(query),
+    	optionsTmp = JSON.stringify(options || {});
+	logger.debug('Moongoose: %s.%s(%s) %s', coll, method, queryTmp, optionsTmp);
+});
+
 mongoose.connect(dbURL);
 
 mongoose.connection.on('connected', function () {  
-	  console.log('Mongoose default connection open to ' + dbURL);
-	}); 
+	logger.debug('Mongoose default connection open to ' + dbURL);
+}); 
 
 // If the connection throws an error
 mongoose.connection.on('error',function (err) {  
-  console.log('Mongoose default connection error: ' + err);
+	logger.error('Mongoose default connection error: ' + err);
 }); 
 
 // When the connection is disconnected
 mongoose.connection.on('disconnected', function () {  
-  console.log('Mongoose default connection disconnected'); 
+	logger.info('Mongoose default connection disconnected'); 
 });
 	
 app.listen(app.get('port'), function() {    
-	console.log('Server up: http://localhost:' + app.get('port')); 
+	logger.debug('Server up - port:' + app.get('port')); 
 }); 

@@ -7,7 +7,9 @@ var express = require('express'),
 	// The multer module supports the file uploads
 	multer = require('multer'),
 	home = require('../controllers/home'),
-	image = require('../controllers/image');
+	image = require('../controllers/image'),
+	logger = require('./logger'),
+	imageDir = path.join(__dirname, '../public/upload/temp');
 
 // WARNING: Make sure that you always handle the files that a user uploads. 
 // Never add multer as a global middleware since a malicious user could 
@@ -15,8 +17,8 @@ var express = require('express'),
 // function on routes where you are handling the uploaded files.
 var multerStorage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		console.log("Destination: " + path.join(__dirname, '../public/upload/temp'));
-		cb(null, path.join(__dirname, '../public/upload/temp'));
+		logger.debug('' + __filename + ": Destination: " + path.join(__dirname, '../public/upload/temp'));
+		cb(null, imageDir);
 	},
 	filename: function (req, fileObj, cb) {
 		cb(null, fileObj.originalname); 

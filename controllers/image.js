@@ -1,6 +1,7 @@
 var fs = require('fs'),
 	path = require('path'), 
 	sidebar = require('../helpers/sidebar'),
+	logger = require('../server/logger'),
 	common = require('../helpers/common'),
 	Models = require('../models'),
 	md5 = require('MD5'); 
@@ -11,7 +12,6 @@ module.exports = {
 	// The params property was added to the request object via the 
 	// urlencoded feature, which is part of the body parser module
 	index: function(req, res) {
-		console.log("GET imahe.." + req.params.image_id);
 		 // Declare empty viewModel variable object
 		var viewModel = {
 			image: {}, 
@@ -59,7 +59,6 @@ module.exports = {
 	create: function(req, res) {
 		var saveImage = function() {
 			var imgUrl = common.randomHex(16);
-			console.log("URL " + imgUrl);
 			
 			Models.Image.find({ filename: imgUrl }, function(err, images) { 
 				if (images.length> 0) {  
@@ -71,7 +70,7 @@ module.exports = {
 						srcFile = req.file.filename,
 						ext = path.extname(srcFile).toLowerCase(),
 						destPath = path.resolve(__dirname, '../public/upload/' + imgUrl + ext);		
-						console.log("DEST " + destPath + ", SRC " + srcPath);
+						logger.debug('' + __filename + ": DEST " + destPath + ", SRC " + srcPath);
 					if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
 						fs.rename(srcPath, destPath, function(err) {
 							if (err) { throw err; }
