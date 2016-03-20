@@ -11,6 +11,7 @@ module.exports = {
 	// The params property was added to the request object via the 
 	// urlencoded feature, which is part of the body parser module
 	index: function(req, res) {
+		console.log("GET imahe.." + req.params.image_id);
 		 // Declare empty viewModel variable object
 		var viewModel = {
 			image: {}, 
