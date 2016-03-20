@@ -12,9 +12,18 @@ git rebase origin/master
 
 heroku login
 heroku create
+git add .
+git commit -m ""
 git push heroku master
 heroku ps:scale web=1
 heroku logs --tail
+
+Heroku Config:
+1. List
+heroku config
+
+2. Add
+heroku config:set DB_URL = mongodb://foobar:LfU7NZvM9Qu4@ds019839.mlab.com:19839/heroku_nks7jjp
 
 Deploy on Heroku
 1. Install the Heroku Toolbelt
@@ -24,8 +33,8 @@ $ heroku login
 4. Create a new Heroku app:
 5. $ heroku create
 6. Add the MongoHQ Add-on
-$ heroku addons:add mongohq
-7. Create Procfile and add the following content:
+$ heroku addons:add mongolab:sandbox
+7. Create a Procfile to specify your app’s process types:
 web: node server.js
 8. Push the local repo to Heroku:
 9. $ git push heroku webdemo2:master
