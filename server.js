@@ -17,7 +17,7 @@ app = config.init(app);
 mongoose.connect(process.env.DB_URL);
 mongoose.set('debug', true);
 mongoose.connection.on('open', function() { 
-	console.log('Mongoose connected.'); 
+	console.log('Mongoose connected - ' + process.env.DB_URL); 
 }); 
 app.listen(app.get('port'), function() {    
 	console.log('Server up: http://localhost:' + app.get('port')); }); 
