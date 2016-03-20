@@ -26,7 +26,6 @@ var uploadImg = multer({ storage: multerStorage });
 
 module.exports = {
 	use: function(app) {
-		console.log("JEE");
 		router.get('/', home.index);
 		router.get('/images/:image_id', image.index);
 		router.post('/images', uploadImg.single('mfile'), image.create);

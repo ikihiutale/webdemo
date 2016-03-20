@@ -3,6 +3,7 @@ var sidebar = require('../helpers/sidebar'),
 
 module.exports = {
 	index: function(req, res) {
+		console.log("Miksi ei toimi");
 		var viewModel = {    
 				images: []
 		};
