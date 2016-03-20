@@ -15,6 +15,7 @@ app.set('views', __dirname + '/views');
 app = config.init(app);
 // mongoose.connect('mongodb://localhost/imgPloadr'); 
 mongoose.connect(process.env.DB_URL);
+mongoose.set('debug', true);
 mongoose.connection.on('open', function() { 
 	console.log('Mongoose connected.'); 
 }); 
