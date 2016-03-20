@@ -23,7 +23,7 @@ Heroku Config:
 heroku config
 
 2. Add
-heroku config:set DB_URL = mongodb://foobar:LfU7NZvM9Qu4@ds019839.mlab.com:19839/heroku_nks7jjp
+heroku config:set DB_URL = mongodb://user:passwd@ds019839.mlab.com:19839/heroku_nks7jjp
 
 Deploy on Heroku
 1. Install the Heroku Toolbelt
@@ -40,7 +40,3 @@ web: node server.js
 9. $ git push heroku webdemo2:master
 10. Open the app:
 $ heroku open
-
-ds019839.mlab.com:19839/heroku_nks7jjpv -u foobar -p LfU7NZvM9Qu4
-
-mongodb://foobar:LfU7NZvM9Qu4@ds019839.mlab.com:19839/heroku_nks7jjpv
