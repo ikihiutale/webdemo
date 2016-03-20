@@ -16,6 +16,7 @@ app = config.init(app);
 // mongoose.connect('mongodb://localhost/imgPloadr'); 
 mongoose.connect(process.env.DB_URL);
 mongoose.set('debug', true);
+console.log('Mongoose connected START');
 mongoose.connection.on('open', function() { 
 	console.log('Mongoose connected - ' + process.env.DB_URL); 
 }); 
