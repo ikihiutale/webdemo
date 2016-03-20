@@ -13,12 +13,26 @@ app.set('port', process.env.PORT || 3300);
 app.set('views', __dirname + '/views'); 
 // Initializes the app
 app = config.init(app);
-// mongoose.connect('mongodb://localhost/imgPloadr'); 
-mongoose.connect(process.env.DB_URL);
+var dbURL = process.env.MONGOLAB_URI || 'mongodb://localhost/imgPloadr';
+
 mongoose.set('debug', true);
-console.log('Mongoose connected START');
-mongoose.connection.on('open', function() { 
-	console.log('Mongoose connected - ' + process.env.DB_URL); 
+//console.log('Mongoose STARTING ' + dbURL);
+mongoose.connect(dbURL);
+
+mongoose.connection.on('connected', function () {  
+	  console.log('Mongoose default connection open to ' + dbURL);
+	}); 
+
+// If the connection throws an error
+mongoose.connection.on('error',function (err) {  
+  console.log('Mongoose default connection error: ' + err);
 }); 
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {  
+  console.log('Mongoose default connection disconnected'); 
+});
+	
 app.listen(app.get('port'), function() {    
-	console.log('Server up: http://localhost:' + app.get('port')); }); 
+	console.log('Server up: http://localhost:' + app.get('port')); 
+}); 
