@@ -15,7 +15,8 @@ var express = require('express'),
 // function on routes where you are handling the uploaded files.
 var multerStorage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		cb(null, path.join(__dirname, 'public/upload/temp'));
+		console.log("Destination: " + path.join(__dirname, '../public/upload/temp'));
+		cb(null, path.join(__dirname, '../public/upload/temp'));
 	},
 	filename: function (req, fileObj, cb) {
 		cb(null, fileObj.originalname); 

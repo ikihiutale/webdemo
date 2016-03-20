@@ -70,7 +70,8 @@ module.exports = {
 					var srcPath = req.file.path,
 						srcFile = req.file.filename,
 						ext = path.extname(srcFile).toLowerCase(),
-						destPath = path.resolve('./public/upload/' + imgUrl + ext);					
+						destPath = path.resolve(__dirname, '../public/upload/' + imgUrl + ext);		
+						console.log("DEST " + destPath + ", SRC " + srcPath);
 					if (ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') {
 						fs.rename(srcPath, destPath, function(err) {
 							if (err) { throw err; }
