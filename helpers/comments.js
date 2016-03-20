@@ -21,10 +21,12 @@ var attachImage = function(comment, next) {
 
 module.exports = {
 	newest: function(cb) {
+		console.log("comment 1");
 		// The first parameter in the find query is an empty 
 		// JavaScript object, meaning that every comment in the database
 		// is retrieved 
 		models.Comment.find({}, {}, { limit: 5, sort: { 'timestamp': -1 }  }, function(err, comments){
+			console.log("comment 2");
 			// To use the each function of async to apply that function 
 			// to every item in the comments collection.
 			// Every comment in the comment's array will be passed individually 
@@ -32,9 +34,11 @@ module.exports = {
 			// the final callback will execute, which basically fires the very first callback 
 			// function that was passed into the newest function as its only parameter
 			async.each(comments, attachImage, function(err) { 
+				console.log("comment 3..");
 				if (err) { throw err; } 
 				cb(err, comments);
 			}); 
-		}); 
+		});
+		console.log("comment 4 END");
 	}
 };
