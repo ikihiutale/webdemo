@@ -2,6 +2,7 @@ var models = require('../models'),
 	async = require('async');
 
 module.exports = function(callback) { 
+	console.log("stats Start");
 	async.parallel([ 
 		   function(next) { 
 			   models.Image.count({}, next);
@@ -40,6 +41,7 @@ module.exports = function(callback) {
 				}); 
 		   }], 
 		function(err, results) { 
+			console.log("stats END");
 			callback(null, 
 				{ images: results[0], 
 				  comments: results[1], 
