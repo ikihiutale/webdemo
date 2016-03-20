@@ -15,3 +15,23 @@ heroku create
 git push heroku master
 heroku ps:scale web=1
 heroku logs --tail
+
+Deploy on Heroku
+1. Install the Heroku Toolbelt
+2. Signup for a Heroku Account
+3. Login to Heroku:
+$ heroku login
+4. Create a new Heroku app:
+5. $ heroku create
+6. Add the MongoHQ Add-on
+$ heroku addons:add mongohq
+7. Create Procfile and add the following content:
+web: node server.js
+8. Push the local repo to Heroku:
+9. $ git push heroku webdemo2:master
+10. Open the app:
+$ heroku open
+
+ds019839.mlab.com:19839/heroku_nks7jjpv -u foobar -p LfU7NZvM9Qu4
+
+mongodb://foobar:LfU7NZvM9Qu4@ds019839.mlab.com:19839/heroku_nks7jjpv

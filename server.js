@@ -13,7 +13,8 @@ app.set('port', process.env.PORT || 3300);
 app.set('views', __dirname + '/views'); 
 // Initializes the app
 app = config.init(app);
-mongoose.connect('mongodb://localhost/imgPloadr'); 
+// mongoose.connect('mongodb://localhost/imgPloadr'); 
+mongoose.connect(process.env.DB_URL);
 mongoose.connection.on('open', function() { 
 	console.log('Mongoose connected.'); 
 }); 
